@@ -9,8 +9,10 @@ git clone https://github.com/javashin/mate-next-overlay.git -b master mate-next-
 Then Inside /usr/local/mate-next-overlay Copy mate-next-overlay.conf to /etc/portage/repos.conf/ \
 emerge --sync. \
 
-To Install emerge -av mate-base/mate \
-To Upgrade Existing Mate-Desktop Installation emerge --deep --update --newuse --with-bdeps=y --verbose --ask @world 
+To Install =
+emerge -av mate-base/mate \
+To Upgrade Existing Mate-Desktop Installation =
+emerge --deep --update --newuse --with-bdeps=y --verbose --ask @world 
 
 
 
