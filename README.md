@@ -1,17 +1,17 @@
 # mate-next-overlay
 Gentoo Mate Next Overlay With Development Branch Ebuilds. \
 
-Current Version = 1.23.3 \
+- Current Version = 1.23.3 
 
 How To Use This Not Oficial Overlay ? \
 As Root - Go To /usr/local And Clone This Git Repo And = \
 git clone https://github.com/javashin/mate-next-overlay.git -b master mate-next-overlay \
 Then Inside /usr/local/mate-next-overlay Copy mate-next-overlay.conf to /etc/portage/repos.conf/ \
-emerge --sync. \
+emerge --sync. 
 
-To Install =
+To Install = \
 emerge -av mate-base/mate \
-To Upgrade Existing Mate-Desktop Installation =
+To Upgrade Existing Mate-Desktop Installation = \
 emerge --deep --update --newuse --with-bdeps=y --verbose --ask @world 
 
 
