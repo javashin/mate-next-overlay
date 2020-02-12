@@ -3,4 +3,4 @@
 ### Now At 1.24.0 Stable Release
 
 
-❮img src="screenshots/1.png" ❯
+❮img src="https://raw.githubusercontent.com/javashin/mate-next-overlay/master/screenshots/1.png" ❯
