@@ -1,66 +1,50 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6,7,8} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit distutils-r1 gnome2
+inherit distutils-r1 python-utils-r1
 
-DESCRIPTION="Tweak tool for MATE, a fork of MintDesktop"
-HOMEPAGE="https://launchpad.net/ubuntu/+source/mate-tweak"
-
-IUSE="nls"
-
-if [[ ${PV} == 9999 ]];then
-	inherit git-r3
-	KEYWORDS=""
-	SRC_URI=""
-	EGIT_REPO_URI="https://bitbucket.org/ubuntu-mate/${PN}"
-else
-	KEYWORDS="~amd64 ~x86 ~arm ~arm64"
-	SRC_URI="
-		https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV}.orig.tar.gz
-	"
-fi
+DESCRIPTION="Tweak tool for the MATE Desktop, a fork of mintDesktop"
+HOMEPAGE="https://launchpad.net/ubuntu/+source/mate-tweak
+	https://github.com/ubuntu-mate/mate-tweak"
+SRC_URI="https://github.com/ubuntu-mate/mate-tweak/archive/${PV}.tar.gz
+	-> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
+KEYWORDS="~amd64 ~x86"
 SLOT="0"
 
-DEPEND="
-	${PYTHON_DEPS}
+COMMON_DEPEND=${PYTHON_DEPS}
+DEPEND="${COMMON_DEPEND}
+	dev-python/python-distutils-extra[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
-	sys-devel/gettext
-	dev-python/python-distutils-extra"
-
-RDEPEND="dev-libs/glib:2
-	dev-python/psutil
-	dev-python/pygobject:3
-	dev-python/setproctitle
+	sys-devel/gettext"
+RDEPEND="${COMMON_DEPEND}
+	app-shells/bash:*
+	dev-libs/glib:2
+	dev-python/psutil[${PYTHON_USEDEP}]
+	dev-python/pygobject:3[${PYTHON_USEDEP}]
+	dev-python/setproctitle[${PYTHON_USEDEP}]
 	gnome-base/dconf
 	mate-base/caja
 	>=mate-base/mate-desktop-1.14
 	mate-base/mate-panel
 	mate-extra/mate-media
 	sys-process/psmisc
-	x11-misc/wmctrl
 	x11-libs/gdk-pixbuf:2
 	x11-libs/gtk+:3
 	>=x11-libs/libnotify-0.7"
 
-pkg_postinst(){
-	gnome2_gconf_install
-	gnome2_schemas_update
-	echo
-	elog "If you're using x11-misc/compton, you can create a local configuration file"
-	elog "depending on the window manager you're using (metacity or marco)."
-	elog "The configuration must be in ~/.config/wmname-compton.conf, begin 'wmname'"
-	elog "the window manager."
-	echo
+RESTRICT="mirror"
+
+pkg_setup() {
+	python_setup
 }
 
-pkg_postrm(){
-	gnome2_gconf_uninstall
-	gnome2_schemas_update
+src_install() {
+	distutils-r1_python_install
+    python_fix_shebang "${ED}"
 }

@@ -60,7 +60,8 @@ DEPEND="${RDEPEND}
 	dev-util/gtk-doc-am
 	>=dev-util/intltool-0.50.1
 	sys-devel/gettext
-	virtual/pkgconfig"
+	virtual/pkgconfig
+        app-text/texlive-core"
 
 # Tests use dogtail which is not available on Gentoo.
 RESTRICT="test"
